@@ -133,7 +133,7 @@ void __init rt305x_gpio_init(u32 mode)
 		rt305x_gpio_reserve(RT305X_GPIO_I2C_SD, RT305X_GPIO_I2C_SCLK);
 
 	if ((mode & RT305X_GPIO_MODE_SPI) == 0)
-		rt305x_gpio_reserve(RT305X_GPIO_SPI_EN, RT305X_GPIO_SPI_CLK);
+		rt305x_gpio_reserve(RT305X_GPIO_SPI_EN, RT305X_GPIO_SPI_DIN);
 
 	t = mode >> RT305X_GPIO_MODE_UART0_SHIFT;
 	t &= RT305X_GPIO_MODE_UART0_MASK;

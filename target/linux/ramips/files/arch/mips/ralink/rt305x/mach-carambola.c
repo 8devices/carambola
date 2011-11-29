@@ -13,6 +13,7 @@
 #include <linux/mtd/mtd.h>
 #include <linux/mtd/partitions.h>
 #include <linux/mtd/physmap.h>
+#include <linux/spi/spi.h>
 
 #include <asm/mach-ralink/machine.h>
 #include <asm/mach-ralink/rt305x.h>
@@ -94,6 +95,15 @@ static struct platform_device *carambola_devices[] __initdata = {
         &carambola_i2c_gpio
 };
 
+static struct spi_board_info carambola_spi_info[] = {
+	{
+		.bus_num	= 0,
+		.chip_select	= 0,
+		.max_speed_hz	= 0,
+		.modalias	= "spidev",
+	}
+};
+
 static void __init carambola_init(void)
 {
 	rt305x_gpio_init((RT305X_GPIO_MODE_GPIO << RT305X_GPIO_MODE_UART0_SHIFT) |
@@ -106,6 +116,7 @@ static void __init carambola_init(void)
 	rt305x_register_ethernet();
 	rt305x_register_wifi();
 	rt305x_register_wdt();
+	rt305x_register_spi(carambola_spi_info, ARRAY_SIZE(carambola_spi_info));
 	rt305x_register_usb();
 }
 
